@@ -6,10 +6,11 @@ apiVersion: v1
 kind: Pod
 spec:
   containers:
+  - name: jnlp
+    image: jenkins/inbound-agent:3355.v388858a_47b_33-3-jdk21
   - name: kubectl
-    image: bitnami/kubectl:latest
-    command: ['sleep']
-    args: ['99d']
+    image: dtzar/helm-kubectl:latest
+    command: ['cat']
     tty: true
 '''
         }
