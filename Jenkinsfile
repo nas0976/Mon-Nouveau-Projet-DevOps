@@ -1,11 +1,25 @@
 pipeline {
-    agent any
+    agent {
+        kubernetes {
+            yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: kubectl
+    image: bitnami/kubectl:latest
+    command: ['cat']
+    tty: true
+'''
+        }
+    }
     stages {
         stage('Déploiement') {
             steps {
-                echo 'Déploiement des ressources Kubernetes...'
-                sh 'kubectl apply -f kubernetes/wordpress-deployment.yaml'
-                sh 'kubectl apply -f kubernetes/wordpress-service.yaml'
+                container('kubectl') {
+                    echo 'Déploiement des ressources Kubernetes...'
+                    sh 'kubectl apply -f kubernetes/wordpress-deployment.yaml'
+                }
             }
         }
     }
