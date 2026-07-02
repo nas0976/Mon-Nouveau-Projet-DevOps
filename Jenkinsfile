@@ -21,6 +21,7 @@ spec:
                 container('kubectl') {
                     echo 'Déploiement des ressources...'
                     sh 'kubectl apply -f kubernetes/wordpress-deployment.yaml'
+                sh 'kubectl apply -f kubernetes/wordpress-service.yaml'
                 }
             }
         }
