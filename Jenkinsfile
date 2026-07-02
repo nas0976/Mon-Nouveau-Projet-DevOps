@@ -8,10 +8,9 @@ spec:
   containers:
   - name: kubectl
     image: bitnami/kubectl:latest
-    command: ['cat']
+    command: ['sleep']
+    args: ['99d']
     tty: true
-  - name: jnlp
-    image: jenkins/inbound-agent:3355.v388858a_47b_33-3-jdk21
 '''
         }
     }
@@ -19,11 +18,8 @@ spec:
         stage('Deploy') {
             steps {
                 container('kubectl') {
-                    echo 'Vérification de kubectl...'
-                    sh 'which kubectl || echo "kubectl introuvable"'
-                    sh 'kubectl version --client || echo "Erreur version kubectl"'
                     echo 'Déploiement des ressources...'
-                    sh '/opt/bitnami/kubectl/bin/kubectl apply -f kubernetes/wordpress-deployment.yaml'
+                    sh 'kubectl apply -f kubernetes/wordpress-deployment.yaml'
                 }
             }
         }
