@@ -15,25 +15,21 @@ spec:
       containers:
       - name: mysql
         image: mysql:5.7
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
         env:
         - name: MYSQL_DATABASE
-          value: wordpress
+          value: "wordpress"
         - name: MYSQL_USER
-          value: wordpress_user
+          value: "wordpress_user"
         - name: MYSQL_PASSWORD
-          value: password123
+          value: "password123"
         - name: MYSQL_ROOT_PASSWORD
-          value: rootpassword
+          value: "rootpassword"
         ports:
         - containerPort: 3306
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql-service
-  namespace: jenkins
-spec:
-  ports:
-  - port: 3306
-  selector:
-    app: mysql
