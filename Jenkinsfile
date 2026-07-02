@@ -20,6 +20,7 @@ spec:
             steps {
                 container('kubectl') {
                     echo 'Déploiement des ressources...'
+                sh 'kubectl apply -f kubernetes/mysql-deployment.yaml'
                     sh 'kubectl apply -f kubernetes/wordpress-deployment.yaml'
                 sh 'kubectl apply -f kubernetes/wordpress-service.yaml'
                 }
