@@ -16,7 +16,7 @@ spec:
         }
     }
     stages {
-        stage('Déploiement') {
+        stage('Deploy') {
             steps {
                 container('kubectl') {
                     echo 'Déploiement des ressources Kubernetes...'
